@@ -53,16 +53,16 @@ export class BookService implements OnInit {
 
   removeBook(book: Book) {
 
-    if (book.imageUrl) {
+    if (book.photoURL) {
 
-      const refFromURL = firebase.storage().refFromURL(book.imageUrl);
+      const refFromURL = firebase.storage().refFromURL(book.photoURL);
 
       refFromURL.delete().then(
         () => {
-          console.log('Photo removed');
+          console.log('Photo removed:' + book.photoURL);
         },
         (error) => {
-          console.log('Could not remove photo: ' + error);
+          console.log('Could not remove photo: ' + book.photoURL + ': ' + error.message);
         }
       );
     }

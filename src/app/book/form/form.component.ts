@@ -14,11 +14,13 @@ import { FileService } from 'src/app/service/file.service';
 
 export class FormComponent implements OnInit {
 
+  static photoDirectory: string = "images/books";
+
   formGroup: FormGroup;
   
-  imageUrl: string;
-  imageUploading = false;
-  imageUploaded = false;
+  photoURL: string;
+  photoUploading = false;
+  photoUploaded = false;
 
   constructor(
     
@@ -41,20 +43,6 @@ export class FormComponent implements OnInit {
       synopsis: ''
     });
   }
-
-  onUploadImage(image: File) {
-
-    this.imageUploading = true;
-
-    this.fileService.upload(image).then(
-
-      (imageUrl: string) => {
-        this.imageUrl = imageUrl;
-        this.imageUploading = false;
-        this.imageUploaded = true;
-      }
-    );
-  }  
   
   onSave() {
 
@@ -63,18 +51,33 @@ export class FormComponent implements OnInit {
     book.author = this.formGroup.get('author').value;
     book.synopsis = this.formGroup.get('synopsis').value;
 
-    if (this.imageUrl && this.imageUrl !== '') {
+    if (this.photoURL && this.photoURL !== '') {
 
-      book.imageUrl = this.imageUrl;
+      book.photoURL = this.photoURL;
     }
 
     this.bookService.addBook(book);
     this.router.navigate(['/books']);
   }
 
-  onSelectImage(event: { target: { files: File[]; }; }) {
+  onSelectPhoto(event: { target: { files: File[]; }; }) {
 
-    this.onUploadImage(event.target.files[0]);
+    this.uploadPhoto(event.target.files[0]);
+  }  
+
+  private uploadPhoto(photo: File) {
+
+    this.photoUploading = true;
+
+    this.fileService.upload(photo, FormComponent.photoDirectory).then(
+
+      (photoURL: string) => {
+        
+        this.photoURL = photoURL;
+        this.photoUploading = false;
+        this.photoUploaded = true;
+      }
+    );
   }  
 }
 

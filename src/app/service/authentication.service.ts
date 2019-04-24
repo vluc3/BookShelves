@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 
 import { AuthenticationSignEnum } from '../enum/AuthenticationSignEnum';
+import { User } from '../model/User.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +10,14 @@ import { AuthenticationSignEnum } from '../enum/AuthenticationSignEnum';
 
 export class AuthenticationService {
   
-  signUp(email: string, password: string) {
+  signUp(user: User) {
 
-    return this.sign(AuthenticationSignEnum.Up, email, password);
+    return this.sign(AuthenticationSignEnum.Up, user);
   }
   
-  signIn(email: string, password: string) {
+  signIn(user: User) {
 
-    return this.sign(AuthenticationSignEnum.In, email, password);
+    return this.sign(AuthenticationSignEnum.In, user);
   }
 
   signOut() {
@@ -24,22 +25,26 @@ export class AuthenticationService {
     this.sign(AuthenticationSignEnum.Out);
   } 
 
-  private sign(authenticationSign: AuthenticationSignEnum, email?: string, password?: string) {
+  private sign(authenticationSign: AuthenticationSignEnum, user?: User) {
 
-    let signFunction: Promise<any> = this.getSignMethod(authenticationSign, email, password);
-    
+    let signMethod: Promise<any> = this.getSignMethod(authenticationSign, user);
+
     if (authenticationSign == AuthenticationSignEnum.Out) {
 
-      signFunction.then();
+      signMethod.then();
 
     } else {
 
       return new Promise(
         (resolve, reject) => {
-          signFunction.then(
+          signMethod.then(
             (data) => {
               resolve();
-              console.log("uid: " + data.user.uid + " email: " + data.user.email);
+              
+              if (authenticationSign == AuthenticationSignEnum.Up) {
+
+                this.update(user.displayName, user.photoURL, data.user);
+              }
             },
             (error) => {
               reject(error);
@@ -49,13 +54,35 @@ export class AuthenticationService {
       );
     }
   }
+
+  private update(displayName: string, photoURL: string, user?: firebase.User) {
+
+    user = (user == undefined) ? user : firebase.auth().currentUser;
+    
+    if (user != null) {
+
+      user.updateProfile({
+
+        displayName: displayName,
+        photoURL: photoURL
+
+      }).then(function() {
+
+        console.log("user updated:", user);
+
+      }).catch(function(error) {
+
+        console.log("user update error:" + error.message);
+      });
+    }
+  }
   
-  private getSignMethod(authenticationSign: AuthenticationSignEnum, email?: string, password?: string): Promise<any> {
+  private getSignMethod(authenticationSign: AuthenticationSignEnum, user: User): Promise<any> {
     
     switch (authenticationSign) {
 
-      case AuthenticationSignEnum.Up: return firebase.auth().createUserWithEmailAndPassword(email, password);
-      case AuthenticationSignEnum.In: return firebase.auth().signInWithEmailAndPassword(email, password);
+      case AuthenticationSignEnum.Up: return firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
+      case AuthenticationSignEnum.In: return firebase.auth().signInWithEmailAndPassword(user.email, user.password);
       case AuthenticationSignEnum.Out: return firebase.auth().signOut();
     }
   }

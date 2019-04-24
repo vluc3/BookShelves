@@ -7,7 +7,7 @@
         <div class="form-group">
           <label for="email">Adresse mail</label>
           <input 
-            type="text"
+            type="email"
             id="email"
             class="form-control"
             formControlName="email"
@@ -26,7 +26,7 @@
           class="btn btn-primary"
           type="submit"
           [disabled]="formGroup.invalid">
-          Me connecter
+          Connexion
         </button>
       </form>
       <p class="text-danger">{{errorMessage}}</p>

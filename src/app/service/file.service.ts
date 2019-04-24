@@ -8,23 +8,23 @@ import * as firebase from 'firebase';
 
 export class FileService {
 
-  upload(file: File) {
+  upload(file: File, directory: string) {
 
     return new Promise(
 
       (resolve, reject) => {
-        const fileName = Date.now().toString();
+        const date = Date.now().toString();
 
         const upload = firebase.storage()
-          .ref().child('images/' + fileName + file.name)
+          .ref().child(directory + '/' + date + '.' + file.name)
           .put(file);
 
         upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
           () => {
-            console.log('Loading…');
+            console.log('Uploading ' + file.name + '…');
           },
           (error) => {
-            console.log('Error while loading: ' + error);
+            console.log('Error while uploading file: ' + error.message);
             reject(error);
           },
           () => {

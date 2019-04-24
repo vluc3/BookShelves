@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
+
 import { AuthenticationService } from '../service/authentication.service';
+import { User } from '../model/User.model';
 
 @Component({
   selector: 'app-navigator',
@@ -10,15 +12,17 @@ import { AuthenticationService } from '../service/authentication.service';
 
 export class NavigatorComponent implements OnInit {
 
-  isAuthenticated: boolean;
+  user: User = new User();
 
   constructor(private authenticationService: AuthenticationService) {}
 
   ngOnInit() {
 
     firebase.auth().onAuthStateChanged(
-      (user) => {
-        this.isAuthenticated = user != null;
+
+      (user: firebase.User) => {
+        
+        this.user.assignFirebaseUser(user);
       }
     );
   }
@@ -27,5 +31,7 @@ export class NavigatorComponent implements OnInit {
 
     this.authenticationService.signOut();
   }
+
+
 }
 
