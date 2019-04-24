@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AuthenticationService } from 'src/app/service/authentication.service';
-import { AuthenticationSignEnum } from 'src/app/enum/AuthenticationSignEnum';
-import { User } from '../model/User.model';
+import { AuthenticationService } from 'src/app/user/service/authentication.service';
+import { AuthenticationSignEnum } from 'src/app/user/enum/authenticationSignEnum';
+import { User } from '../model/user.model';
 
 @Component({})
 export abstract class SignComponent implements OnInit {

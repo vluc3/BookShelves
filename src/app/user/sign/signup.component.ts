@@ -3,8 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { SignComponent } from './sign.component';
-import { AuthenticationService } from 'src/app/service/authentication.service';
-import { FileService } from '../service/file.service';
+import { AuthenticationService } from 'src/app/user/service/authentication.service';
+import { FileService } from '../../core/service/file.service';
 
 @Component({
   selector: 'app-signup',

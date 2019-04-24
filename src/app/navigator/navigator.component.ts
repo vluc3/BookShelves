@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 
-import { AuthenticationService } from '../service/authentication.service';
-import { User } from '../model/User.model';
+import { AuthenticationService } from '../user/service/authentication.service';
+import { User } from '../user/model/user.model';
 
 @Component({
   selector: 'app-navigator',

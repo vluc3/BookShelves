@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { BookService } from 'src/app/service/book.service';
-import { Book } from 'src/app/model/Book.model';
-import { FileService } from 'src/app/service/file.service';
+import { BookService } from 'src/app/book/service/book.service';
+import { Book } from 'src/app/book/model/book.model';
+import { FileService } from 'src/app/core/service/file.service';
 
 @Component({
   selector: 'app-form',

@@ -5,8 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SignupComponent } from './authentication/signup.component';
-import { SigninComponent } from './authentication/signin.component';
+import { SignupComponent } from './user/sign/signup.component';
+import { SigninComponent } from './user/sign/signin.component';
 import { ListComponent } from './book/list/list.component';
 import { DetailComponent } from './book/detail/detail.component';
 import { FormComponent } from './book/form/form.component';

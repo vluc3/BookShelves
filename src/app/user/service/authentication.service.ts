@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 
-import { AuthenticationSignEnum } from '../enum/AuthenticationSignEnum';
-import { User } from '../model/User.model';
+import { AuthenticationSignEnum } from '../enum/authenticationSignEnum';
+import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
