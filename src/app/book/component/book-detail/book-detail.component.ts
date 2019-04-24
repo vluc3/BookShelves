@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Book } from 'src/app/book/model/book.model';
-import { BookService } from 'src/app/book/service/book.service';
+import { Book } from '../../model/book.model';
+import { BookService } from '../../service/book.service';
 
 @Component({
-  selector: 'app-detail',
-  templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.scss']
+  selector: 'app-book-detail',
+  templateUrl: './book-detail.component.html',
+  styleUrls: ['./book-detail.component.scss']
 })
 
-export class DetailComponent implements OnInit {
+export class BookDetailComponent implements OnInit {
 
   book: Book;
 

@@ -21,7 +21,7 @@
       class="nav navbar-nav navbar-right" 
       *ngIf="user.isAuthenticated">
       <li routerLinkActive="active">
-        <a>{{user.email}}</a>
+        <a routerLink="authentication/account">{{user.email}}</a>
       </li>
       <li>
         <a (click)="onSignOut()"

@@ -5,22 +5,22 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SignupComponent } from './user/sign/signup.component';
-import { SigninComponent } from './user/sign/signin.component';
-import { ListComponent } from './book/list/list.component';
-import { DetailComponent } from './book/detail/detail.component';
-import { FormComponent } from './book/form/form.component';
+import { UserSignUpComponent } from './user/component/user-sign-up/user-sign-up.component';
+import { UserSignInComponent } from './user/component/user-sign-in/user-sign-in.component';
+import { BookListComponent } from './book/component/book-list/book-list.component';
+import { BookDetailComponent } from './book/component/book-detail/book-detail.component';
+import { BookFormComponent } from './book/component/book-form/book-form.component';
 import { NavigatorComponent } from './navigator/navigator.component';
 
 @NgModule({
   declarations: [    
     AppComponent,
-    SignupComponent,
-    SigninComponent,
-    ListComponent,
-    DetailComponent,
-    FormComponent,
-    NavigatorComponent
+    UserSignUpComponent,
+    UserSignInComponent,
+    BookListComponent,
+    BookDetailComponent,
+    BookFormComponent,
+    NavigatorComponent,
   ],
   imports: [
     BrowserModule,

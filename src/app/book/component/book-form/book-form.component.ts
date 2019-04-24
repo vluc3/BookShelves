@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { BookService } from 'src/app/book/service/book.service';
-import { Book } from 'src/app/book/model/book.model';
-import { FileService } from 'src/app/core/service/file.service';
+import { BookService } from '../../service/book.service';
+import { Book } from '../../model/book.model';
+import { FileService } from '../../../core/service/file.service';
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  selector: 'app-book-form',
+  templateUrl: './book-form.component.html',
+  styleUrls: ['./book-form.component.scss']
 })
 
-export class FormComponent implements OnInit {
+export class BookFormComponent implements OnInit {
 
   static photoDirectory: string = "images/books";
 
@@ -69,7 +69,7 @@ export class FormComponent implements OnInit {
 
     this.photoUploading = true;
 
-    this.fileService.upload(photo, FormComponent.photoDirectory).then(
+    this.fileService.upload(photo, BookFormComponent.photoDirectory).then(
 
       (photoURL: string) => {
         

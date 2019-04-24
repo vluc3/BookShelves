@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AuthenticationService } from 'src/app/user/service/authentication.service';
-import { AuthenticationSignEnum } from 'src/app/user/enum/authenticationSignEnum';
-import { User } from '../model/user.model';
+import { FileService } from 'src/app/core/service/file.service';
+
+import { AuthenticationService } from '../../service/authentication.service';
+import { AuthenticationSignEnum } from '../../enum/authenticationSignEnum';
+
+import { User } from '../../model/user.model';
 
 @Component({})
-export abstract class SignComponent implements OnInit {
+export abstract class UserSignComponent implements OnInit {
 
   static photoDirectory: string = "images/users";
 
@@ -16,20 +19,33 @@ export abstract class SignComponent implements OnInit {
 
   photoURL: string;
 
+  /**
+   * 
+   */
+
   constructor(
 
     protected formBuilder: FormBuilder,
     protected router: Router,
+    protected fileService: FileService,
     protected authenticationService: AuthenticationService
 
   ) {}
 
   protected abstract initFormGroup(): void;
 
+  /**
+   * 
+   */
+
   ngOnInit() {
 
     this.initFormGroup();
   }
+
+  /**
+   * 
+   */
 
   onSubmit(authenticationSignType: string) {
     
@@ -61,6 +77,10 @@ export abstract class SignComponent implements OnInit {
     );
   }
   
+  /**
+   * 
+   */
+
   protected getSignMethod(
     
     authenticationSign: AuthenticationSignEnum, 

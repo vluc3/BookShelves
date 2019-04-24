@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { SignComponent } from './sign.component';
+import { UserSignComponent } from '../user-sign/user-sign.component';
 
 @Component({
-  selector: 'app-signin',
-  templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.scss']
+  selector: 'app-user-sign-in',
+  templateUrl: './user-sign-in.component.html',
+  styleUrls: ['./user-sign-in.component.scss']
 })
 
-export class SigninComponent extends SignComponent {
+export class UserSignInComponent extends UserSignComponent {
 
   protected initFormGroup(): void {
 

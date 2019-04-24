@@ -13,9 +13,9 @@ export class FileService {
     return new Promise(
 
       (resolve, reject) => {
-        const date = Date.now().toString();
+        let date = Date.now().toString();
 
-        const upload = firebase.storage()
+        let upload = firebase.storage()
           .ref().child(directory + '/' + date + '.' + file.name)
           .put(file);
 

@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
-import { Book } from 'src/app/book/model/book.model';
-import { BookService } from 'src/app/book/service/book.service';
 
+import { Book } from '../../model/book.model';
+import { BookService } from '../../service/book.service';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  selector: 'app-book-list',
+  templateUrl: './book-list.component.html',
+  styleUrls: ['./book-list.component.scss']
 })
 
-export class ListComponent implements OnInit, OnDestroy {
+export class BookListComponent implements OnInit, OnDestroy {
 
   books: Book[];
   booksSubscription: Subscription;
