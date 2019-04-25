@@ -1,14 +1,25 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 
-import { UserSignTypeEnum } from '../enum/userSignTypeEnum';
-import { User } from '../model/user.model';
+import { UserSignTypeEnum } from '../enum/UserSignTypeEnum';
+import { User } from '../model/User.model';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthenticationService {
+
+  get(): User {
+
+    let result: User = new User();
+    result.assign(firebase.auth().currentUser);
+    return result;
+  }
+  
+  /**
+   * 
+   */
   
   signUp(user: User) {
 
@@ -63,7 +74,7 @@ export class AuthenticationService {
    * 
    */
 
-  private update(displayName: string, photoURL: string, user?: firebase.User) {
+  update(displayName: string, photoURL: string, user?: firebase.User) {
 
     user = (user == undefined) ? user : firebase.auth().currentUser;
     
@@ -84,7 +95,7 @@ export class AuthenticationService {
       });
     }
   }
-  
+
   /**
    * 
    */

@@ -7,7 +7,7 @@ export class User {
     public photoURL: string = null;
     public isAuthenticated: boolean = false;
 
-    assignFirebaseUser(user: firebase.User) {
+    assign(user: firebase.User) {
 
         this.isAuthenticated = user != null;
 

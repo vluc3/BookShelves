@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 
 import { AuthenticationService } from '../user/service/authentication.service';
-import { User } from '../user/model/user.model';
+import { User } from '../user/model/User.model';
 
 @Component({
   selector: 'app-navigator',
@@ -22,7 +22,7 @@ export class NavigatorComponent implements OnInit {
 
       (user: firebase.User) => {
         
-        this.user.assignFirebaseUser(user);
+        this.user.assign(user);
       }
     );
   }

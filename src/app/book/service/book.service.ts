@@ -4,7 +4,7 @@ import { Subject } from 'rxjs/Subject';
 import * as firebase from 'firebase';
 import DataSnapshot = firebase.database.DataSnapshot;
 
-import { Book } from '../model/book.model';
+import { Book } from '../model/Book.model';
 
 @Injectable({
   providedIn: 'root'

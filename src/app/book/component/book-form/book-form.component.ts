@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { BookService } from '../../service/book.service';
-import { Book } from '../../model/book.model';
+import { Book } from '../../model/Book.model';
 import { FileService } from '../../../core/service/file.service';
 
 @Component({

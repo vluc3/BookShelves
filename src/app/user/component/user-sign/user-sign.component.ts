@@ -5,9 +5,9 @@ import { Router } from '@angular/router';
 import { FileService } from 'src/app/core/service/file.service';
 
 import { AuthenticationService } from '../../service/authentication.service';
-import { UserSignTypeEnum } from '../../enum/userSignTypeEnum';
+import { UserSignTypeEnum } from '../../enum/UserSignTypeEnum';
 
-import { User } from '../../model/user.model';
+import { User } from '../../model/User.model';
 
 @Component({})
 export abstract class UserSignComponent implements OnInit {
@@ -84,6 +84,38 @@ export abstract class UserSignComponent implements OnInit {
     }
 
     return result;
+  }
+
+  /**
+   * 
+   */
+
+  protected setUser() {
+
+    let user: User = this.authenticationService.get();
+
+    if (user.isAuthenticated) {
+
+      this.formGroup.controls['displayName'].setValue(user.displayName);  
+      this.formGroup.controls['email'].setValue(user.email);  
+    }
+
+    this.setPhotoURLChangeEvent();
+  }    
+
+  /**
+   * 
+   */
+   
+  protected setPhotoURLChangeEvent() {
+
+    let photoURLElement: HTMLElement = document.querySelector('#photoURL');
+
+    photoURLElement.onchange = (event: any) => {
+
+      let photo: File = event.target.files[0];
+      this.uploadPhoto(photo);
+    }
   }
 
   /**

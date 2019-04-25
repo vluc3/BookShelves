@@ -17,16 +17,10 @@ export class UserSignEditComponent extends UserSignComponent {
 
       displayName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]],
+      password: ['', [Validators.pattern(/[0-9a-zA-Z]{6,}/)]],
       photoURL: ['', []]
     });
 
-    let photoURLElement: HTMLElement = document.querySelector('#photoURL');
-
-    photoURLElement.onchange = (event: any) => {
-
-      let photo: File = event.target.files[0];
-      this.uploadPhoto(photo);
-    }
+    this.setUser();
   }
 }

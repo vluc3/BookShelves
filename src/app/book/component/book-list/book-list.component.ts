@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
 
-import { Book } from '../../model/book.model';
+import { Book } from '../../model/Book.model';
 import { BookService } from '../../service/book.service';
 
 @Component({
