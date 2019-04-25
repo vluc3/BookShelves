@@ -8,11 +8,11 @@ import { AppComponent } from './app.component';
 import { UserSignUpComponent } from './user/component/user-sign-up/user-sign-up.component';
 import { UserSignInComponent } from './user/component/user-sign-in/user-sign-in.component';
 import { UserSignEditComponent } from './user/component/user-sign-edit/user-sign-edit.component';
+import { UserSignDetailComponent } from './user/component/user-sign-detail/user-sign-detail.component';
 import { BookListComponent } from './book/component/book-list/book-list.component';
-import { BookDetailComponent } from './book/component/book-detail/book-detail.component';
+import { BookViewComponent } from './book/component/book-view/book-view.component';
 import { BookFormComponent } from './book/component/book-form/book-form.component';
 import { NavigatorComponent } from './navigator/navigator.component';
-import { UserSignDetailComponent } from './user/component/user-sign-detail/user-sign-detail.component';
 
 @NgModule({
   declarations: [    
@@ -20,11 +20,11 @@ import { UserSignDetailComponent } from './user/component/user-sign-detail/user-
     UserSignUpComponent,
     UserSignInComponent,
     UserSignEditComponent,
+    UserSignDetailComponent,
     BookListComponent,
-    BookDetailComponent,
+    BookViewComponent,
     BookFormComponent,
     NavigatorComponent,
-    UserSignDetailComponent,
   ],
   imports: [
     BrowserModule,

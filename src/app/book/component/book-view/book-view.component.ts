@@ -5,12 +5,12 @@ import { Book } from '../../model/book.model';
 import { BookService } from '../../service/book.service';
 
 @Component({
-  selector: 'app-book-detail',
-  templateUrl: './book-detail.component.html',
-  styleUrls: ['./book-detail.component.scss']
+  selector: 'app-book-view',
+  templateUrl: './book-view.component.html',
+  styleUrls: ['./book-view.component.scss']
 })
 
-export class BookDetailComponent implements OnInit {
+export class BookViewComponent implements OnInit {
 
   book: Book;
 

@@ -7,7 +7,7 @@ import { UserSignEditComponent } from './user/component/user-sign-edit/user-sign
 
 import { BookListComponent } from './book/component/book-list/book-list.component';
 import { BookFormComponent } from './book/component/book-form/book-form.component';
-import { BookDetailComponent } from './book/component/book-detail/book-detail.component';
+import { BookViewComponent } from './book/component/book-view/book-view.component';
 
 import { AuthenticationGuardService } from './user/service/authentication-guard.service';
 
@@ -18,7 +18,7 @@ const routes: Routes = [
   {path: 'user/sign/edit', component: UserSignEditComponent},
   {path: 'books', canActivate: [AuthenticationGuardService], component: BookListComponent},
   {path: 'books/add', canActivate: [AuthenticationGuardService], component: BookFormComponent},
-  {path: 'books/view/:id', canActivate: [AuthenticationGuardService], component: BookDetailComponent},
+  {path: 'books/view/:id', canActivate: [AuthenticationGuardService], component: BookViewComponent},
   {path: '', redirectTo: 'books', pathMatch: 'full'},
   {path: '**', redirectTo: 'books'}
 ];
