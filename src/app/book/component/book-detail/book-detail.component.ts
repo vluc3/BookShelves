@@ -24,13 +24,12 @@ export class BookDetailComponent implements OnInit {
   ngOnInit() {
 
     this.book = new Book();
-    const id = this.route.snapshot.params['id'];
+    let id: number = this.route.snapshot.params['id'];
 
-    this.bookService.getBook(+id).then(
-      (book: Book) => {
-        this.book = book;
-      }
-    );
+    this.bookService.getBook(id).then((book: Book) => {
+
+      this.book = book;
+    });
   }
 
   onBack() {

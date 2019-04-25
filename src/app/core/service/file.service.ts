@@ -10,28 +10,27 @@ export class FileService {
 
   upload(file: File, directory: string) {
 
-    return new Promise(
+    return new Promise((resolve, reject) => {
 
-      (resolve, reject) => {
-        let date = Date.now().toString();
+      let date = Date.now().toString();
 
-        let upload = firebase.storage()
-          .ref().child(directory + '/' + date + '.' + file.name)
-          .put(file);
+      let upload = firebase.storage()
+        .ref().child(directory + '/' + date + '.' + file.name)
+        .put(file);
 
-        upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
-          () => {
-            console.log('Uploading ' + file.name + '…');
-          },
-          (error) => {
-            console.log('Error while uploading file: ' + error.message);
-            reject(error);
-          },
-          () => {
-            resolve(upload.snapshot.ref.getDownloadURL());
-          }
-        );
-      }
-    );
+      upload.on(firebase.storage.TaskEvent.STATE_CHANGED, () => {
+
+        console.log('Uploading ' + file.name + '…');
+        
+      }, (error) => {
+
+        console.log('Error while uploading file: ' + error.message);
+        reject(error);
+
+      }, () => {
+
+        resolve(upload.snapshot.ref.getDownloadURL());
+      });
+    });
   }
 }

@@ -60,7 +60,7 @@ export class BookFormComponent implements OnInit {
     this.router.navigate(['/books']);
   }
 
-  onSelectPhoto(event: { target: { files: File[]; }; }) {
+  onSelectPhoto(event: {target: {files: File[];};}) {
 
     this.uploadPhoto(event.target.files[0]);
   }  

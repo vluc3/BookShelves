@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { FileService } from 'src/app/core/service/file.service';
 
 import { AuthenticationService } from '../../service/authentication.service';
-import { AuthenticationSignEnum } from '../../enum/authenticationSignEnum';
+import { UserSignTypeEnum } from '../../enum/userSignTypeEnum';
 
 import { User } from '../../model/user.model';
 
@@ -47,57 +47,42 @@ export abstract class UserSignComponent implements OnInit {
    * 
    */
 
-  onSubmit(authenticationSignType: string) {
+  onSubmit(signType: string) {
     
-    let authenticationSign = AuthenticationSignEnum[authenticationSignType];
-    let user: User = new User();
-
-    user.email = this.formGroup.get('email').value;
-    user.password = this.formGroup.get('password').value;
-
-    if (authenticationSign == AuthenticationSignEnum.Up) {
-
-      user.displayName = this.formGroup.get('displayName').value;
-
-      if (this.photoURL && this.photoURL !== '') {
-
-        user.photoURL = this.photoURL;
-      }
-    }
-
-    let signMethod = this.getSignMethod(authenticationSign, user);
+    let userSignType = UserSignTypeEnum[signType];
+    let user: User = this.getUser(userSignType);
     
-    signMethod.then(
-      () => {
-        this.router.navigate(['/books']);
-      },
-      (error) => {
-        this.errorMessage = error;
-      }
-    );
+    this.authenticationService.sign(userSignType, user).then(() => {
+
+      this.router.navigate(['/books']);
+
+    }, (error) => {
+
+      this.errorMessage = error;
+    });
   }
   
   /**
    * 
    */
 
-  protected getSignMethod(
-    
-    authenticationSign: AuthenticationSignEnum, 
-    user?: User
+  protected getUser(userSignType: UserSignTypeEnum): User {
 
-  ): Promise<any> {
-    
-    switch (authenticationSign) {
+    let result: User = new User();
 
-      case AuthenticationSignEnum.Up: {
+    result.email = this.formGroup.get('email').value;
+    result.password = this.formGroup.get('password').value;
 
-        return this.authenticationService.signUp(user);
+    if (userSignType == UserSignTypeEnum.Up) {
 
-      } case AuthenticationSignEnum.In: {
+      result.displayName = this.formGroup.get('displayName').value;
 
-        return this.authenticationService.signIn(user);
+      if (this.photoURL && this.photoURL !== '') {
+
+        result.photoURL = this.photoURL;
       }
     }
+
+    return result;
   }
 }

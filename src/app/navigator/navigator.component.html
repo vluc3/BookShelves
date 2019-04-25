@@ -11,17 +11,17 @@
       class="nav navbar-nav navbar-right" 
       *ngIf="! user.isAuthenticated">
       <li routerLinkActive="active">
-        <a routerLink="authentication/signup">Créer un compte</a>
+        <a routerLink="user/sign/up">Créer un compte</a>
       </li>
       <li routerLinkActive="active">
-        <a routerLink="authentication/signin">Connexion</a>
+        <a routerLink="user/sign/in">Se connecter</a>
       </li>
     </ul>
     <ul 
       class="nav navbar-nav navbar-right" 
       *ngIf="user.isAuthenticated">
       <li routerLinkActive="active">
-        <a routerLink="authentication/account">{{user.email}}</a>
+        <a routerLink="user/sign/edit">{{user.email}}</a>
       </li>
       <li>
         <a (click)="onSignOut()"

@@ -24,12 +24,10 @@ export class BookListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.booksSubscription = this.booksService.booksSubject.subscribe(
+    this.booksSubscription = this.booksService.booksSubject.subscribe((books: Book[]) => {
 
-      (books: Book[]) => {
-        this.books = books;
-      }
-    );
+      this.books = books;
+    });
 
     this.booksService.getBooks();
     this.booksService.emitBooks();
@@ -39,6 +37,10 @@ export class BookListComponent implements OnInit, OnDestroy {
 
     this.booksSubscription.unsubscribe();
   }
+
+  /**
+   * 
+   */
 
   onAdd() {
 
