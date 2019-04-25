@@ -85,4 +85,19 @@ export abstract class UserSignComponent implements OnInit {
 
     return result;
   }
+
+  /**
+   * 
+   */
+   
+  protected uploadPhoto(photo: File) {
+
+    this.fileService.upload(photo, UserSignComponent.photoDirectory).then(
+
+      (photoURL: string) => {
+
+        this.photoURL = photoURL;
+      }
+    );
+  }  
 }
