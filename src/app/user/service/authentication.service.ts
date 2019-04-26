@@ -74,26 +74,29 @@ export class AuthenticationService {
    * 
    */
 
-  update(displayName: string, photoURL: string, user?: firebase.User) {
+  async update(displayName: string, photoURL: string, user?: firebase.User): Promise<any> {
 
-    user = (user == undefined) ? user : firebase.auth().currentUser;
+    user = (user) ? user : firebase.auth().currentUser;
     
-    if (user != null) {
+    if (user) {
 
-      user.updateProfile({
+      try {
 
-        displayName: displayName,
-        photoURL: photoURL
+        await user.updateProfile({
 
-      }).then(function() {
+          displayName: displayName,
+          photoURL: photoURL
+        });
 
         console.log("user updated:", user);
-
-      }).catch(function(error) {
+      }
+      catch (error) {
 
         console.log("user update error:" + error.message);
-      });
+      }
     }
+
+    return null;
   }
 
   /**
@@ -104,13 +107,17 @@ export class AuthenticationService {
     
     switch (userSignType) {
 
-      case UserSignTypeEnum.Up: {
+      case UserSignTypeEnum.In: {
         
+        return firebase.auth().signInWithEmailAndPassword(user.email, user.password);
+
+      } case UserSignTypeEnum.Up: {
+      
         return firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
 
-      } case UserSignTypeEnum.In: {
+      } case UserSignTypeEnum.Edit: {
       
-        return firebase.auth().signInWithEmailAndPassword(user.email, user.password);
+        return this.update(user.displayName, user.photoURL);
 
       } case UserSignTypeEnum.Out: {
       

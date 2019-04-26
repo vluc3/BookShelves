@@ -1,10 +1,10 @@
 export class User {
 
-    public uid: string = null;
-    public displayName: string = null;
-    public email: string = null;
-    public password: string = null;
-    public photoURL: string = null;
+    public uid: string;
+    public email: string;
+    public password: string;
+    public displayName: string;
+    public photoURL: string;
     public isAuthenticated: boolean = false;
 
     assign(user: firebase.User) {
@@ -14,8 +14,8 @@ export class User {
         if (user != null) {
 
             this.uid = user.uid;
-            this.displayName = user.displayName;
             this.email = user.email;
+            this.displayName = user.displayName;
             this.photoURL = user.photoURL;
         }
     }

@@ -1,8 +1,8 @@
 export enum UserSignTypeEnum {
 
-    Up,
-    Down,
-    In,
-    Out,
-    Edit
+    Up = "Up",
+    Down = "Down",
+    In = "In",
+    Out = "Out",
+    Edit = "Edit"
 }

@@ -45,6 +45,14 @@
             Image chargée
           </p>
         </div>
+        <div 
+          *ngIf="photoURL"
+          style="margin-bottom: 15px">
+          <img 
+            style="max-width: 300px"
+            [src]="photoURL"
+          >
+        </div>
         <button 
           type="submit"
           class="btn btn-success" 

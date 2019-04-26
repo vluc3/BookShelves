@@ -15,9 +15,10 @@ export abstract class UserSignComponent implements OnInit {
   static photoDirectory: string = "images/users";
 
   formGroup: FormGroup;
-  errorMessage: string;
-
+  userSignType: UserSignTypeEnum;
+  
   photoURL: string;
+  errorMessage: string;
 
   /**
    * 
@@ -41,18 +42,18 @@ export abstract class UserSignComponent implements OnInit {
   ngOnInit() {
 
     this.initFormGroup();
+    this.setUser();
   }
 
   /**
    * 
    */
 
-  onSubmit(signType: string) {
+  onSubmit() {
     
-    let userSignType = UserSignTypeEnum[signType];
-    let user: User = this.getUser(userSignType);
+    let user: User = this.getUser(this.userSignType);
     
-    this.authenticationService.sign(userSignType, user).then(() => {
+    this.authenticationService.sign(this.userSignType, user).then(() => {
 
       this.router.navigate(['/books']);
 
@@ -73,7 +74,7 @@ export abstract class UserSignComponent implements OnInit {
     result.email = this.formGroup.get('email').value;
     result.password = this.formGroup.get('password').value;
 
-    if (userSignType == UserSignTypeEnum.Up) {
+    if (userSignType == UserSignTypeEnum.Up || userSignType == UserSignTypeEnum.Edit) {
 
       result.displayName = this.formGroup.get('displayName').value;
 
@@ -92,31 +93,15 @@ export abstract class UserSignComponent implements OnInit {
 
   protected setUser() {
 
-    let user: User = this.authenticationService.get();
+    if (this.userSignType == UserSignTypeEnum.Up || this.userSignType == UserSignTypeEnum.Edit) {
 
-    if (user.isAuthenticated) {
-
-      this.formGroup.controls['displayName'].setValue(user.displayName);  
+      let user: User = this.authenticationService.get();
+      
       this.formGroup.controls['email'].setValue(user.email);  
+      this.formGroup.controls['displayName'].setValue(user.displayName);
+      this.photoURL = user.photoURL;
     }
-
-    this.setPhotoURLChangeEvent();
   }    
-
-  /**
-   * 
-   */
-   
-  protected setPhotoURLChangeEvent() {
-
-    let photoURLElement: HTMLElement = document.querySelector('#photoURL');
-
-    photoURLElement.onchange = (event: any) => {
-
-      let photo: File = event.target.files[0];
-      this.uploadPhoto(photo);
-    }
-  }
 
   /**
    * 

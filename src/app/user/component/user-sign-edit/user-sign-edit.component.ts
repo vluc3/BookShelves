@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 
 import { UserSignComponent } from '../user-sign/user-sign.component';
+import { UserSignTypeEnum } from '../../enum/UserSignTypeEnum';
 
 @Component({
   selector: 'app-user-sign-edit',
@@ -10,17 +11,25 @@ import { UserSignComponent } from '../user-sign/user-sign.component';
 })
 
 export class UserSignEditComponent extends UserSignComponent {
+
+  ngOnInit() {
+
+    this.userSignType = UserSignTypeEnum.Edit;
+    super.ngOnInit();
+  }
+
+  /**
+   * 
+   */
   
   protected initFormGroup(): void {
 
     this.formGroup = this.formBuilder.group({
 
+      email: ['', []],
+      password: ['', []],
       displayName: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.pattern(/[0-9a-zA-Z]{6,}/)]],
       photoURL: ['', []]
     });
-
-    this.setUser();
   }
 }

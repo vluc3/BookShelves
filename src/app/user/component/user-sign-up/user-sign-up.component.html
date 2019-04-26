@@ -1,14 +1,18 @@
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2">
     <h3>Créer un compte</h3>
+    <br>
     <form 
       [formGroup]="formGroup" 
-      (ngSubmit)="onSubmit('Up')">
+      (ngSubmit)="onSubmit()">
       <app-user-sign-detail 
-        [formGroup]="formGroup">
+        [formGroup]="formGroup"
+        [userSignType]="userSignType"
+        [photoURL]="photoURL"
+        (selectPhotoEvent)="uploadPhoto($event)">
       </app-user-sign-detail>
       <button 
-        class="btn btn-primary"
+        class="btn btn-success"
         type="submit"
         [disabled]="formGroup.invalid">
         Créer          

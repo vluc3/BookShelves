@@ -18,9 +18,9 @@ export class FileService {
         .ref().child(directory + '/' + date + '.' + file.name)
         .put(file);
 
-      upload.on(firebase.storage.TaskEvent.STATE_CHANGED, () => {
+      upload.on(firebase.storage.TaskEvent.STATE_CHANGED, (event) => {
 
-        console.log('Uploading ' + file.name + '…');
+        console.log('Uploading ' + event.bytesTransferred + ' Ko of ' + file.name + '…');
         
       }, (error) => {
 
