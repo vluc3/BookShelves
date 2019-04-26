@@ -11,10 +11,11 @@
         [photoURL]="photoURL"
         (selectPhotoEvent)="uploadPhoto($event)">
       </app-user-sign-detail>
+      <br>
       <button 
         class="btn btn-success"
         type="submit"
-        [disabled]="formGroup.invalid">
+        [disabled]="formGroup.invalid || photoUploading">
         Créer          
       </button>
     </form>

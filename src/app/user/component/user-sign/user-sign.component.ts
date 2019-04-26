@@ -17,6 +17,7 @@ export abstract class UserSignComponent implements OnInit {
   formGroup: FormGroup;
   userSignType: UserSignTypeEnum;
   
+  photoUploading = false;
   photoURL: string;
   errorMessage: string;
 
@@ -109,11 +110,14 @@ export abstract class UserSignComponent implements OnInit {
    
   protected uploadPhoto(photo: File) {
 
+    this.photoUploading = true;
+
     this.fileService.upload(photo, UserSignComponent.photoDirectory).then(
 
       (photoURL: string) => {
 
         this.photoURL = photoURL;
+        this.photoUploading = false;
       }
     );
   }  

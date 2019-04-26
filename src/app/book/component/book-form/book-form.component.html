@@ -31,18 +31,31 @@
           </textarea>
         </div>
         <div class="form-group">
-          <label for="photoURL">Image</label>
-          <input
-            id="photoURL" 
-            type="file" 
-            class="form-control"
-            accept="image/*"
-            (change)="onSelectPhoto($event)"
-          >
+          <label>Photo</label>
+          <div>
+            <label class="btn btn-primary">
+              Choisir 
+              <input
+                type="file" 
+                id="photoURL" 
+                accept="image/*"
+                style="display: none;"
+                (change)="onSelectPhoto($event)"
+                >
+            </label>
+            <input 
+              type="text"
+              class="btn btn-default"      
+              placeholder="Aucun fichier choisi"
+              style="text-align: left; width: 300px;"
+              [value]="(photo) ? photo.name : null"
+              disabled
+            >
+          </div>    
           <p 
             class="text-success" 
-            *ngIf="ImageUploaded">
-            Image chargée
+            *ngIf="false && photoUploaded">
+            Photo chargée
           </p>
         </div>
         <div 
@@ -53,6 +66,7 @@
             [src]="photoURL"
           >
         </div>
+        <br>
         <button 
           type="submit"
           class="btn btn-success" 

@@ -18,9 +18,15 @@ export class BookFormComponent implements OnInit {
 
   formGroup: FormGroup;
   
+  photo: File;
   photoURL: string;
+
   photoUploading = false;
   photoUploaded = false;
+  
+  /**
+   * 
+   */
 
   constructor(
     
@@ -29,15 +35,24 @@ export class BookFormComponent implements OnInit {
     private fileService: FileService,
     private bookService: BookService
   ) {}
+  
+  /**
+   * 
+   */
               
   ngOnInit() {
 
     this.initFormGroup();
   }
   
+  /**
+   * 
+   */
+
   initFormGroup() {
 
     this.formGroup = this.formBuilder.group({
+
       title: ['', Validators.required],
       author: ['', Validators.required],
       synopsis: ''
@@ -68,6 +83,7 @@ export class BookFormComponent implements OnInit {
   private uploadPhoto(photo: File) {
 
     this.photoUploading = true;
+    this.photo = photo;
 
     this.fileService.upload(photo, BookFormComponent.photoDirectory).then(
 

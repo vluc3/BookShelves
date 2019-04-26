@@ -11,6 +11,8 @@ import { UserSignTypeEnum } from '../../enum/UserSignTypeEnum';
 
 export class UserSignDetailComponent implements AfterViewInit {
   
+  private photo: File;
+
   @Input() formGroup: FormGroup;
   @Input() userSignType: UserSignTypeEnum;
   @Input() photoURL: string;
@@ -23,14 +25,14 @@ export class UserSignDetailComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
 
-    this.setPhotoChangeEvent();
+    this.setSelectPhotoEvent();
   }
 
   /**
    * 
    */
    
-  private setPhotoChangeEvent() {
+  private setSelectPhotoEvent() {
 
     let element: HTMLElement = document.querySelector('#photoURL');
 
@@ -38,8 +40,8 @@ export class UserSignDetailComponent implements AfterViewInit {
 
       element.onchange = (event: any) => {
 
-        let photo: File = event.target.files[0];
-        this.selectPhotoEvent.emit(photo);
+        this.photo = File = event.target.files[0];
+        this.selectPhotoEvent.emit(this.photo);
       }
     }
   }

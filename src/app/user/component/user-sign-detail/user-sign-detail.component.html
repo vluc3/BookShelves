@@ -7,6 +7,7 @@
       id="email"
       class="form-control"
       formControlName="email"
+      placeholder="Adresse mail"
       [readonly]="userSignType == 'Edit'"
     >
   </div>
@@ -19,6 +20,7 @@
       id="password"
       class="form-control"
       formControlName="password"
+      placeholder="Mot de passe"
     >
   </div>
   <div 
@@ -30,19 +32,33 @@
       id="displayName"
       class="form-control"
       formControlName="displayName"
+      placeholder="Nom"
     >
   </div>
   <div 
     class="form-group"
     *ngIf="userSignType == 'Up' || userSignType == 'Edit'">
-    <label for="photoURL">Image</label>
-    <input
-      type="file" 
-      id="photoURL" 
-      class="form-control"
-      accept="image/*"
-      formControlName="photoURL"
-    >
+    <label>Photo</label>
+    <div>
+      <label class="btn btn-primary">
+        Choisir 
+        <input
+          type="file" 
+          id="photoURL" 
+          accept="image/*"
+          formControlName="photoURL"
+          style="display: none;"
+        >
+      </label>
+      <input 
+        type="text"
+        class="btn btn-default"      
+        placeholder="Aucun fichier choisi"
+        style="text-align: left; width: 300px;"
+        [value]="(photo) ? photo.name : null"
+        disabled
+      >
+    </div>    
   </div>
   <div 
     *ngIf="photoURL"
