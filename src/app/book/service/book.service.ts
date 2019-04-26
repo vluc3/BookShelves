@@ -12,6 +12,8 @@ import { Book } from '../model/Book.model';
 
 export class BookService implements OnInit {
 
+  static url: string = "/books";
+
   books: Book[] = [];
   booksSubject = new Subject<Book[]>();
   
@@ -22,7 +24,7 @@ export class BookService implements OnInit {
 
   getBooks() {
 
-    firebase.database().ref('/books').on('value', (data: DataSnapshot) => {
+    firebase.database().ref(BookService.url).on('value', (data: DataSnapshot) => {
         this.books = data.val() ? data.val() : [];
         this.emitBooks();
       }
@@ -33,7 +35,7 @@ export class BookService implements OnInit {
 
     return new Promise(
       (resolve, reject) => {
-        firebase.database().ref('/books/' + id).once('value').then(
+        firebase.database().ref(BookService.url + '/' + id).once('value').then(
           (data: DataSnapshot) => {
             resolve(data.val());
           }, (error) => {
@@ -75,7 +77,7 @@ export class BookService implements OnInit {
   
   saveBooks() {
     
-    firebase.database().ref('/books').set(this.books);
+    firebase.database().ref(BookService.url).set(this.books);
   }  
 
   emitBooks() {
